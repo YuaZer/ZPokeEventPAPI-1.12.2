@@ -1,27 +1,32 @@
 package io.github.yuazer.zpokeeventpapi.MapHelper;
 
 import java.util.HashMap;
+import java.util.Map;
 
-public class MyHashMap<K, String, Integer> {
-    private HashMap<K, Pair<String, Integer>> map;
+public class MyHashMap {
+    private Map<Pair<String, String>, Integer> map;
 
     public MyHashMap() {
         map = new HashMap<>();
     }
 
-    public void put(K key, String value1, Integer value2) {
-        map.put(key, new Pair<>(value1, value2));
+    public void put(String firstString, String secondString, Integer integerValue) {
+        Pair<String, String> key = new Pair<>(firstString, secondString);
+        map.put(key, integerValue);
     }
 
-    public Pair<String, Integer> get(K key) {
+    public Integer get(String firstString, String secondString) {
+        Pair<String, String> key = new Pair<>(firstString, secondString);
         return map.get(key);
     }
 
-    public boolean containsKey(K key) {
+    public boolean containsKey(String firstString, String secondString) {
+        Pair<String, String> key = new Pair<>(firstString, secondString);
         return map.containsKey(key);
     }
 
-    public void remove(K key) {
+    public void remove(String firstString, String secondString) {
+        Pair<String, String> key = new Pair<>(firstString, secondString);
         map.remove(key);
     }
 
@@ -33,21 +38,40 @@ public class MyHashMap<K, String, Integer> {
         return map.isEmpty();
     }
 
-    public static class Pair<String, Integer> {
-        private String value1;
-        private Integer value2;
+    private static class Pair<T1, T2> {
+        private T1 first;
+        private T2 second;
 
-        public Pair(String value1, Integer value2) {
-            this.value1 = value1;
-            this.value2 = value2;
+        public Pair(T1 first, T2 second) {
+            this.first = first;
+            this.second = second;
         }
 
-        public String getValue1() {
-            return value1;
+        public T1 getFirst() {
+            return first;
         }
 
-        public Integer getValue2() {
-            return value2;
+        public T2 getSecond() {
+            return second;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj) {
+                return true;
+            }
+            if (obj == null || getClass() != obj.getClass()) {
+                return false;
+            }
+            Pair<?, ?> pair = (Pair<?, ?>) obj;
+            return first.equals(pair.first) && second.equals(pair.second);
+        }
+
+        @Override
+        public int hashCode() {
+            return 31 * first.hashCode() + second.hashCode();
         }
     }
 }
+
+

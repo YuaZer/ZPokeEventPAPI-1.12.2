@@ -1,8 +1,10 @@
 Message:
   reload: "&e[ZPokeEventPAPI] &a重载成功"
-  playerOffline: "&c该玩家不在线哦!"
+  playerOffline: "&c该玩家不在线或事件不存在!"
   alreadyStart: "&c该玩家已经开始了该事件的记录哦~"
+  alreadyStop: "&c该玩家还未开始该事件的记录哦~"
   successStart: "&a成功开启&b%player%&a的&b%event%&a事件检测"
+  successStop: "&a成功关闭&b%player%&a的&b%event%&a事件检测"
 EventSet:
   #捕捉事件所用名称
   successCapture: "successCapture"

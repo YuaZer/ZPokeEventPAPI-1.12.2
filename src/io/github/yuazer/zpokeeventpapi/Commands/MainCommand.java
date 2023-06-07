@@ -21,11 +21,26 @@ public class MainCommand implements CommandExecutor {
                 String eventName = args[1];
                 Player player = Bukkit.getPlayer(args[2]);
                 if (player != null && Main.getEventSet().contains(eventName)) {
-                    if (Main.getEventMap().get(eventName).getValue1() != null) {
-                        Main.getEventMap().put(eventName, player.getName(), 0);
+                    if (Main.getEventMap().get(player.getName(), eventName) == null) {
+                        Main.getEventMap().put(player.getName(), eventName, 0);
                         sender.sendMessage(YamlUtils.getConfigMessage("Message.successStart").replace("%player%", player.getName()).replace("%event%", eventName));
                     } else {
                         sender.sendMessage(YamlUtils.getConfigMessage("Message.alreadyStart"));
+                    }
+                } else {
+                    sender.sendMessage(YamlUtils.getConfigMessage("Message.playerOffline"));
+                }
+                return true;
+            }
+            if (args[0].equalsIgnoreCase("stop") && sender.isOp() && args.length == 3) {
+                String eventName = args[1];
+                Player player = Bukkit.getPlayer(args[2]);
+                if (player != null && Main.getEventSet().contains(eventName)) {
+                    if (Main.getEventMap().get(player.getName(), eventName) != null) {
+                        Main.getEventMap().put(player.getName(), eventName, null);
+                        sender.sendMessage(YamlUtils.getConfigMessage("Message.successStop").replace("%player%", player.getName()).replace("%event%", eventName));
+                    } else {
+                        sender.sendMessage(YamlUtils.getConfigMessage("Message.alreadyStop"));
                     }
                 } else {
                     sender.sendMessage(YamlUtils.getConfigMessage("Message.playerOffline"));
