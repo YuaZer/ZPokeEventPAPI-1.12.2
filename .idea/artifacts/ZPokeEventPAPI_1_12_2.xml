@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ZPokeEventPAPI-1.12.2">
+    <output-path>$PROJECT_DIR$/out/artifacts/ZPokeEventPAPI_1_12_2</output-path>
+    <root id="archive" name="ZPokeEventPAPI-1.12.2.jar">
+      <element id="module-output" name="ZPokeEventPAPI-1.12.2" />
+      <element id="file-copy" path="$PROJECT_DIR$/plugin.yml" />
+      <element id="file-copy" path="$PROJECT_DIR$/config.yml" />
+    </root>
+  </artifact>
+</component>

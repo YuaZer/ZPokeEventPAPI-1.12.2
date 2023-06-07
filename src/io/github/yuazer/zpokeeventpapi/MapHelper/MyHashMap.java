@@ -10,23 +10,23 @@ public class MyHashMap {
         map = new HashMap<>();
     }
 
-    public void put(String firstString, String secondString, Integer integerValue) {
-        Pair<String, String> key = new Pair<>(firstString, secondString);
+    public void put(String playerName, String eventName, Integer integerValue) {
+        Pair<String, String> key = new Pair<>(playerName, eventName);
         map.put(key, integerValue);
     }
 
-    public Integer get(String firstString, String secondString) {
-        Pair<String, String> key = new Pair<>(firstString, secondString);
+    public Integer get(String playerName, String eventName) {
+        Pair<String, String> key = new Pair<>(playerName, eventName);
         return map.get(key);
     }
 
-    public boolean containsKey(String firstString, String secondString) {
-        Pair<String, String> key = new Pair<>(firstString, secondString);
+    public boolean containsKey(String playerName, String eventName) {
+        Pair<String, String> key = new Pair<>(playerName, eventName);
         return map.containsKey(key);
     }
 
-    public void remove(String firstString, String secondString) {
-        Pair<String, String> key = new Pair<>(firstString, secondString);
+    public void remove(String playerName, String eventName) {
+        Pair<String, String> key = new Pair<>(playerName, eventName);
         map.remove(key);
     }
 

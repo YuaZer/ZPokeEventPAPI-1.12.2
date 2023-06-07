@@ -7,7 +7,11 @@ import java.util.List;
 
 public class YamlUtils {
     public static String getConfigMessage(String path) {
-        return Main.getInstance().getConfig().getString(path).replace("&", "§");
+        try {
+            return Main.getInstance().getConfig().getString(path).replace("&", "§");
+        } catch (NullPointerException e) {
+            return "";
+        }
     }
 
     public static List<String> getConfigStringList(String path) {

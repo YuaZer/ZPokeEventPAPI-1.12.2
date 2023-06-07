@@ -15,9 +15,14 @@ public class PokeEvents implements Listener {
         if (event.getForgeEvent() instanceof CaptureEvent.SuccessfulCapture) {
             CaptureEvent.SuccessfulCapture e = (CaptureEvent.SuccessfulCapture) event.getForgeEvent();
             Player player = Bukkit.getPlayer(e.player.func_110124_au());
-            if (Main.getEventMap().get(player.getName(), YamlUtils.getConfigMessage("EventSet.successCapture")) != null) {
+            String pokename = e.getPokemon().getPokemonData().getSpecies().getPokemonName();
+            if (!YamlUtils.getConfigMessage("EventSet.successCapture").equalsIgnoreCase("") && Main.getEventMap().get(player.getName(), YamlUtils.getConfigMessage("EventSet.successCapture")) != null) {
                 int before = Main.getEventMap().get(player.getName(), YamlUtils.getConfigMessage("EventSet.successCapture"));
                 Main.getEventMap().put(player.getName(), YamlUtils.getConfigMessage("EventSet.successCapture"), ++before);
+            }
+            if (!YamlUtils.getConfigMessage("EventSet.successCapture_" + pokename).equalsIgnoreCase("") && Main.getEventMap().get(player.getName(), YamlUtils.getConfigMessage("EventSet.successCapture_" + pokename)) != null) {
+                int before = Main.getEventMap().get(player.getName(), YamlUtils.getConfigMessage("EventSet.successCapture_" + pokename));
+                Main.getEventMap().put(player.getName(), YamlUtils.getConfigMessage("EventSet.successCapture_" + pokename), ++before);
             }
         }
     }

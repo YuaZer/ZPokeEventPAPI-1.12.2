@@ -7,6 +7,7 @@ import io.github.yuazer.zpokeeventpapi.Listener.PokeEvents;
 import io.github.yuazer.zpokeeventpapi.MapHelper.MyHashMap;
 import io.github.yuazer.zpokeeventpapi.Utils.YamlUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -43,10 +44,12 @@ public class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
+        saveDefaultConfig();
         if (!dataFile.exists()) {
             dataFile.mkdir();
         }
         loadEventName();
+        loadMap();
         Bukkit.getPluginCommand("zpokeeventpapi").setExecutor(new MainCommand());
         Bukkit.getPluginManager().registerEvents(new PokeEvents(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerEvent(), this);
@@ -59,6 +62,19 @@ public class Main extends JavaPlugin {
     public void onDisable() {
         logDisable(this);
         eventSet.clear();
+        EventHook hook = new EventHook();
+        hook.unregister();
+    }
+
+    public void loadMap() {
+        if (dataFile.listFiles() != null) {
+            for (File file : dataFile.listFiles()) {
+                YamlConfiguration conf = YamlConfiguration.loadConfiguration(file);
+                for (String event : conf.getKeys(false)) {
+                    Main.getEventMap().put(file.getName().replace(".yml", ""), event, conf.getInt(event));
+                }
+            }
+        }
     }
 
     public static void loadEventName() {

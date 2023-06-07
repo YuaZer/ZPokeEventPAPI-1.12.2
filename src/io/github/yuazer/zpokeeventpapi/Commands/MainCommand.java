@@ -47,6 +47,11 @@ public class MainCommand implements CommandExecutor {
                 }
                 return true;
             }
+            if (args[0].equalsIgnoreCase("debug") && sender.isOp()) {
+                Player player = (Player) sender;
+                System.out.println(Main.getEventSet());
+                System.out.println(Main.getEventMap().get(player.getName(), args[1]));
+            }
         }
         return false;
     }
