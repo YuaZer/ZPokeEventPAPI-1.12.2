@@ -6,5 +6,27 @@ Message:
   successStart: "&a成功开启&b%player%&a的&b%event%&a事件检测"
   successStop: "&a成功关闭&b%player%&a的&b%event%&a事件检测"
 EventSet:
-  #捕捉事件所用名称
+  #(变量调用: %zpokeeventpapi_事件名_玩家名%)
+  #捕捉事件: 捕捉事件事件名
   successCapture: "successCapture"
+  #捕捉特定精灵[successCapture_精灵名: "successCapture-精灵名"]
+  successCapture_Absol: "successCapture-Absol"
+  #击败野生精灵
+  successBeatWild: "successBeatWild"
+  #击败野生特定精灵
+  successBeatWild_Absol: "successBeatWild-Absol"
+  #升级
+  LevelUp: "LevelUp"
+  LevelUp_Absol: "LevelUp-Absol"
+  #进化
+  Evolve: "Evolve"
+  #EVS获取
+  EVsGained: "EVsGained"
+  EVsGained_Absol: "EVsGained-Absol"
+  #采摘树果
+  Apricorn: "Apricorn"
+  #采摘树果_种类[BLACK,WHITE,PINK,GREEN,BLUE,YELLOW,RED]
+  Apricorn_BLACK: "Apricorn-BLACK"
+  Fish: "Fish"
+  BeatTrainer: "BeatTrainer"
+  BeatTrainer_我是训练师的名字呀: "BeatTrainer-我是训练师的名字呀"
