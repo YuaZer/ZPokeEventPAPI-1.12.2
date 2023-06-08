@@ -16,7 +16,7 @@ EventSet:
   #击败野生特定精灵
   successBeatWild_Absol: "successBeatWild-Absol"
   #升级
-  LevelUp: "LevelUp"
+  LevelUp: "升级事件"
   LevelUp_Absol: "LevelUp-Absol"
   #进化
   Evolve: "Evolve"
