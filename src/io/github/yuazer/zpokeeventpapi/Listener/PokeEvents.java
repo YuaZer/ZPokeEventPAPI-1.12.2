@@ -34,7 +34,7 @@ public class PokeEvents implements Listener {
         if (event.getForgeEvent() instanceof BeatWildPixelmonEvent) {
             BeatWildPixelmonEvent e = (BeatWildPixelmonEvent) event.getForgeEvent();
             Player player = Bukkit.getPlayer(e.player.func_110124_au());
-            for (PixelmonWrapper pokemon : e.wpp.getOpponentPokemon()) {
+            for (PixelmonWrapper pokemon : e.wpp.getTeamPokemon()) {
                 String pokename = pokemon.getPokemonName();
                 if (!YamlUtils.getConfigMessage("EventSet.successBeatWild").equalsIgnoreCase("") && Main.getEventMap().get(player.getName(), YamlUtils.getConfigMessage("EventSet.successBeatWild")) != null) {
                     int before = Main.getEventMap().get(player.getName(), YamlUtils.getConfigMessage("EventSet.successBeatWild"));
@@ -43,15 +43,16 @@ public class PokeEvents implements Listener {
                 if (!YamlUtils.getConfigMessage("EventSet.successBeatWild_" + pokename).equalsIgnoreCase("") && Main.getEventMap().get(player.getName(), YamlUtils.getConfigMessage("EventSet.successBeatWild_" + pokename)) != null) {
                     int before = Main.getEventMap().get(player.getName(), YamlUtils.getConfigMessage("EventSet.successBeatWild_" + pokename));
                     Main.getEventMap().put(player.getName(), YamlUtils.getConfigMessage("EventSet.successBeatWild_" + pokename), ++before);
+                    System.out.println(Main.getEventMap().get(player.getName(), YamlUtils.getConfigMessage("EventSet.successBeatWild_" + pokename)));
                 }
             }
             return;
         }
-        if (event.getForgeEvent() instanceof LevelUpEvent) {
-            LevelUpEvent e = (LevelUpEvent) event.getForgeEvent();
+        if (event.getForgeEvent() instanceof LevelUpEvent.Post) {
+            LevelUpEvent.Post e = (LevelUpEvent.Post) event.getForgeEvent();
             Player player = Bukkit.getPlayer(e.getPlayer().func_110124_au());
             String pokename = e.getPokemon().getSpecies().getName();
-            int levelUpCount = e.getLevelChange();
+            int levelUpCount = e.getAfterLevel()-e.getBeforeLevel();
             if (!YamlUtils.getConfigMessage("EventSet.LevelUp").equalsIgnoreCase("") && Main.getEventMap().get(player.getName(), YamlUtils.getConfigMessage("EventSet.LevelUp")) != null) {
                 int before = Main.getEventMap().get(player.getName(), YamlUtils.getConfigMessage("EventSet.LevelUp"));
                 Main.getEventMap().put(player.getName(), YamlUtils.getConfigMessage("EventSet.LevelUp"), before + levelUpCount);
@@ -73,7 +74,7 @@ public class PokeEvents implements Listener {
         }
         if (event.getForgeEvent() instanceof EVsGainedEvent) {
             EVsGainedEvent e = (EVsGainedEvent) event.getForgeEvent();
-            int sum = Arrays.stream(e.evStore.getArray()).sum();
+            int sum = Arrays.stream(e.evYields.toArray()).sum();
             Player player = Bukkit.getPlayer(e.pokemon.getOwnerPlayerUUID());
             String pokename = e.pokemon.getSpecies().getName();
             if (!YamlUtils.getConfigMessage("EventSet.EVsGained").equalsIgnoreCase("") && Main.getEventMap().get(player.getName(), YamlUtils.getConfigMessage("EventSet.EVsGained")) != null) {

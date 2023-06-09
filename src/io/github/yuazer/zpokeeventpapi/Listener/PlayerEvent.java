@@ -22,15 +22,12 @@ public class PlayerEvent implements Listener {
         YamlConfiguration conf = YamlConfiguration.loadConfiguration(file);
         for (String eventName : Main.getEventSet()) {
             if (Main.getEventMap().get(player.getName(), eventName) != null) {
-                System.out.println("normal Case");
                 conf.set(eventName, Main.getEventMap().get(player.getName(), eventName));
             } else {
-                System.out.println("null Case");
                 Set<String> list = conf.getKeys(false);
                 list.remove(eventName);
                 System.out.println(list);
                 if (!list.isEmpty()) {
-                    System.out.println("run reset");
                     for (String e : list) {
                         conf.set(e, Main.getEventMap().get(player.getName(), e));
                     }
