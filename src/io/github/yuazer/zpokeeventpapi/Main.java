@@ -1,6 +1,7 @@
 package io.github.yuazer.zpokeeventpapi;
 
 import io.github.yuazer.zpokeeventpapi.Commands.MainCommand;
+import io.github.yuazer.zpokeeventpapi.Hook.CheckHook;
 import io.github.yuazer.zpokeeventpapi.Hook.EventHook;
 import io.github.yuazer.zpokeeventpapi.Listener.PlayerEvent;
 import io.github.yuazer.zpokeeventpapi.Listener.PokeEvents;
@@ -55,7 +56,13 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PlayerEvent(), this);
         logLoaded(this);
         EventHook hook = new EventHook();
-        if (hook.canRegister()) hook.register();
+        CheckHook checkHook = new CheckHook();
+        if (hook.canRegister()) {
+            hook.register();
+        }
+        if (checkHook.canRegister()) {
+            checkHook.register();
+        }
     }
 
     @Override
@@ -63,7 +70,9 @@ public class Main extends JavaPlugin {
         logDisable(this);
         eventSet.clear();
         EventHook hook = new EventHook();
+        CheckHook checkHook = new CheckHook();
         hook.unregister();
+        checkHook.register();
     }
 
     public void loadMap() {

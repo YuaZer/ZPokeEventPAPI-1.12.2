@@ -1,5 +1,6 @@
 package io.github.yuazer.zpokeeventpapi.Commands;
 
+import com.pixelmonmod.pixelmon.spawning.PixelmonSpawning;
 import io.github.yuazer.zpokeeventpapi.Main;
 import io.github.yuazer.zpokeeventpapi.Utils.YamlUtils;
 import org.bukkit.Bukkit;
@@ -51,6 +52,7 @@ public class MainCommand implements CommandExecutor {
                 Player player = (Player) sender;
                 System.out.println(Main.getEventSet());
                 System.out.println(Main.getEventMap().get(player.getName(), args[1]));
+                return true;
             }
         }
         return false;

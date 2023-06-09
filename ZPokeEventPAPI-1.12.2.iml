@@ -21,8 +21,9 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="[P][变量]PlaceholderAPI-2.11.1" level="project" />
-    <orderEntry type="library" name="1.16" level="project" />
     <orderEntry type="library" name="Pixelmon-1.16.5-9.1.5-server" level="project" />
-    <orderEntry type="library" name="server-1.16.5-20210115.111550-srg" level="project" />
+    <orderEntry type="library" name="[自用工具库]ZaxLib[1.16.5]" level="project" />
+    <orderEntry type="library" name="authlib-2.1.28" level="project" />
+    <orderEntry type="library" name="[开发][1.16.5]CatserverSRG-1.16.5-srg" level="project" />
   </component>
 </module>
