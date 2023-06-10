@@ -43,7 +43,6 @@ public class PokeEvents implements Listener {
                 if (!YamlUtils.getConfigMessage("EventSet.successBeatWild_" + pokename).equalsIgnoreCase("") && Main.getEventMap().get(player.getName(), YamlUtils.getConfigMessage("EventSet.successBeatWild_" + pokename)) != null) {
                     int before = Main.getEventMap().get(player.getName(), YamlUtils.getConfigMessage("EventSet.successBeatWild_" + pokename));
                     Main.getEventMap().put(player.getName(), YamlUtils.getConfigMessage("EventSet.successBeatWild_" + pokename), ++before);
-                    System.out.println(Main.getEventMap().get(player.getName(), YamlUtils.getConfigMessage("EventSet.successBeatWild_" + pokename)));
                 }
             }
             return;

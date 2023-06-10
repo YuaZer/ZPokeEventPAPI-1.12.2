@@ -1,6 +1,6 @@
 name: ZPokeEventPAPI
 main: io.github.yuazer.zpokeeventpapi.Main
-version: 0.4
+version: 0.5
 authors:
   - YuaZer
 commands:

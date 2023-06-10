@@ -1,6 +1,7 @@
 package io.github.yuazer.zpokeeventpapi;
 
 import io.github.yuazer.zpokeeventpapi.Commands.MainCommand;
+import io.github.yuazer.zpokeeventpapi.Database.SQLiteDatabase;
 import io.github.yuazer.zpokeeventpapi.Hook.CheckHook;
 import io.github.yuazer.zpokeeventpapi.Hook.EventHook;
 import io.github.yuazer.zpokeeventpapi.Listener.PlayerEvent;
@@ -18,8 +19,7 @@ import java.util.Set;
 
 /**
  * TODO
- * 兼容PAPI变量，玩家在线期间获取MyHashMap的值，不在线调用YAML文件中的值
- * 如果玩家退出游戏，则将该玩家的数据存储到YAML文件中
+ * 将MyHashMap的存储改为存进数据库
  */
 public class Main extends JavaPlugin {
     private static Main instance;
@@ -28,6 +28,12 @@ public class Main extends JavaPlugin {
     //玩家名 事件名 次数
     public static MyHashMap getEventMap() {
         return eventMap;
+    }
+
+    private static SQLiteDatabase database;
+
+    public static SQLiteDatabase getDatabase() {
+        return database;
     }
 
     private static final Set<String> eventSet = new HashSet<>();
@@ -55,6 +61,10 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PokeEvents(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerEvent(), this);
         logLoaded(this);
+        if (YamlUtils.getConfigMessage("DataMode.mode").equalsIgnoreCase("SQLite")) {
+            database = new SQLiteDatabase(this);
+            System.out.println("§aZPokeEventPAPI§7-§bSQLite数据库开启");
+        }
         EventHook hook = new EventHook();
         CheckHook checkHook = new CheckHook();
         if (hook.canRegister()) {
@@ -73,6 +83,7 @@ public class Main extends JavaPlugin {
         CheckHook checkHook = new CheckHook();
         hook.unregister();
         checkHook.register();
+        database.close();
     }
 
     public void loadMap() {

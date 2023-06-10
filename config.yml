@@ -5,6 +5,11 @@ Message:
   alreadyStop: "&c该玩家还未开始该事件的记录哦~"
   successStart: "&a成功开启&b%player%&a的&b%event%&a事件检测"
   successStop: "&a成功关闭&b%player%&a的&b%event%&a事件检测"
+DataMode:
+  #SQLite或者YAML
+  mode: "SQLite"
+  #数据库文件路径
+  SQLitePath: "%pluginPath%/%pluginName%.db"
 EventSet:
   #(变量调用: %zpokeeventpapi_事件名_玩家名%)
   #捕捉事件: 捕捉事件事件名

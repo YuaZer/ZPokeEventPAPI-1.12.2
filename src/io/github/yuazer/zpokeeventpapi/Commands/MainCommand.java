@@ -1,6 +1,5 @@
 package io.github.yuazer.zpokeeventpapi.Commands;
 
-import com.pixelmonmod.pixelmon.spawning.PixelmonSpawning;
 import io.github.yuazer.zpokeeventpapi.Main;
 import io.github.yuazer.zpokeeventpapi.Utils.YamlUtils;
 import org.bukkit.Bukkit;
@@ -13,6 +12,9 @@ public class MainCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
         if (command.getName().equalsIgnoreCase("zpokeeventpapi")) {
+            if (args.length == 0 && sender.isOp()) {
+                return true;
+            }
             if (args[0].equalsIgnoreCase("reload") && sender.isOp()) {
                 Main.getInstance().reloadConfig();
                 Main.loadEventName();

@@ -1,5 +1,8 @@
 package io.github.yuazer.zpokeeventpapi.MapHelper;
 
+import io.github.yuazer.zpokeeventpapi.Main;
+import io.github.yuazer.zpokeeventpapi.Utils.YamlUtils;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,10 +16,26 @@ public class MyHashMap {
     public void put(String playerName, String eventName, Integer integerValue) {
         Pair<String, String> key = new Pair<>(playerName, eventName);
         map.put(key, integerValue);
+        if (YamlUtils.getConfigMessage("DataMode.mode").equalsIgnoreCase("SQLite")) {
+            try {
+                Main.getDatabase().saveEntry(key.getFirst(), key.getSecond(), integerValue);
+                System.out.println(key.getFirst() + "/" + key.getSecond() + "/" + integerValue);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public Integer get(String playerName, String eventName) {
         Pair<String, String> key = new Pair<>(playerName, eventName);
+        if (YamlUtils.getConfigMessage("DataMode.mode").equalsIgnoreCase("SQLite")) {
+            try {
+                System.out.println(Main.getDatabase().getEntry(key.getFirst(), key.getSecond()) != null ? Main.getDatabase().getEntry(key.getFirst(), key.getSecond()) : null);
+                return Main.getDatabase().getEntry(key.getFirst(), key.getSecond()) != null ? Main.getDatabase().getEntry(key.getFirst(), key.getSecond()) : null;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         return map.get(key);
     }
 
@@ -38,7 +57,7 @@ public class MyHashMap {
         return map.isEmpty();
     }
 
-    private static class Pair<T1, T2> {
+    public static class Pair<T1, T2> {
         private T1 first;
         private T2 second;
 
