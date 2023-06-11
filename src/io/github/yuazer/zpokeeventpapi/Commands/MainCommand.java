@@ -18,13 +18,14 @@ public class MainCommand implements CommandExecutor {
             if (args[0].equalsIgnoreCase("reload") && sender.isOp()) {
                 Main.getInstance().reloadConfig();
                 Main.loadEventName();
+                Main.setSqliteMode(YamlUtils.getConfigMessage("DataMode.mode").equalsIgnoreCase("SQLite"));
                 sender.sendMessage(YamlUtils.getConfigMessage("Message.reload"));
             }
             if (args[0].equalsIgnoreCase("start") && sender.isOp() && args.length == 3) {
                 String eventName = args[1];
                 Player player = Bukkit.getPlayer(args[2]);
                 if (player != null && Main.getEventSet().contains(eventName)) {
-                    if (Main.getEventMap().get(player.getName(), eventName) == null) {
+                    if (Main.getEventMap().get(player.getName(), eventName) == -1) {
                         Main.getEventMap().put(player.getName(), eventName, 0);
                         sender.sendMessage(YamlUtils.getConfigMessage("Message.successStart").replace("%player%", player.getName()).replace("%event%", eventName));
                     } else {
@@ -39,8 +40,8 @@ public class MainCommand implements CommandExecutor {
                 String eventName = args[1];
                 Player player = Bukkit.getPlayer(args[2]);
                 if (player != null && Main.getEventSet().contains(eventName)) {
-                    if (Main.getEventMap().get(player.getName(), eventName) != null) {
-                        Main.getEventMap().put(player.getName(), eventName, null);
+                    if (Main.getEventMap().get(player.getName(), eventName) != -1) {
+                        Main.getEventMap().put(player.getName(), eventName, -1);
                         sender.sendMessage(YamlUtils.getConfigMessage("Message.successStop").replace("%player%", player.getName()).replace("%event%", eventName));
                     } else {
                         sender.sendMessage(YamlUtils.getConfigMessage("Message.alreadyStop"));

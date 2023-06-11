@@ -47,6 +47,14 @@ public class Main extends JavaPlugin {
     }
 
     private static File dataFile = new File("plugins/ZPokeEventPAPI/data");
+    private static boolean sqliteMode = false;
+    public static boolean isSqliteMode() {
+        return sqliteMode;
+    }
+
+    public static void setSqliteMode(boolean sqliteMode) {
+        Main.sqliteMode = sqliteMode;
+    }
 
     @Override
     public void onEnable() {
@@ -62,6 +70,7 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PlayerEvent(), this);
         logLoaded(this);
         if (YamlUtils.getConfigMessage("DataMode.mode").equalsIgnoreCase("SQLite")) {
+            sqliteMode = true;
             database = new SQLiteDatabase(this);
             System.out.println("§aZPokeEventPAPI§7-§bSQLite数据库开启");
         }

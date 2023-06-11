@@ -28,7 +28,7 @@ public class EventHook extends PlaceholderExpansion {
         String e = key[0];
         String player = key[1];
         if (Bukkit.getPlayer(player) != null) {
-            if (Main.getEventSet().contains(e) && Main.getEventMap().get(player, e) != null) {
+            if (Main.getEventSet().contains(e) && Main.getEventMap().get(player, e) != -1) {
                 return String.valueOf(Main.getEventMap().get(player, e));
             } else {
                 return "0";
