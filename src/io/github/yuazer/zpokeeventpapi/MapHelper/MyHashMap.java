@@ -2,6 +2,7 @@ package io.github.yuazer.zpokeeventpapi.MapHelper;
 
 import io.github.yuazer.zpokeeventpapi.Main;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,15 +26,15 @@ public class MyHashMap {
     }
 
     public Integer get(String playerName, String eventName) {
-        Pair<String, String> key = new Pair<>(playerName, eventName);
-        if (Main.isSqliteMode()) {
-            try {
+        try {
+            Pair<String, String> key = new Pair<>(playerName, eventName);
+            if (Main.isSqliteMode()) {
                 return Main.getDatabase().getEntry(key.getFirst(), key.getSecond());
-            } catch (Exception e) {
-                e.printStackTrace();
             }
+            return map.get(key);
+        } catch (NullPointerException | SQLException e) {
+            return -1;
         }
-        return map.get(key);
     }
 
     public boolean containsKey(String playerName, String eventName) {

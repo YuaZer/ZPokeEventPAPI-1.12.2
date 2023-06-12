@@ -20,12 +20,13 @@ public class MainCommand implements CommandExecutor {
                 Main.loadEventName();
                 Main.setSqliteMode(YamlUtils.getConfigMessage("DataMode.mode").equalsIgnoreCase("SQLite"));
                 sender.sendMessage(YamlUtils.getConfigMessage("Message.reload"));
+                return true;
             }
             if (args[0].equalsIgnoreCase("start") && sender.isOp() && args.length == 3) {
                 String eventName = args[1];
                 Player player = Bukkit.getPlayer(args[2]);
                 if (player != null && Main.getEventSet().contains(eventName)) {
-                    if (Main.getEventMap().get(player.getName(), eventName) == -1) {
+                    if (Main.getEventMap().get(player.getName(), eventName) == null || Main.getEventMap().get(player.getName(), eventName) == -1) {
                         Main.getEventMap().put(player.getName(), eventName, 0);
                         sender.sendMessage(YamlUtils.getConfigMessage("Message.successStart").replace("%player%", player.getName()).replace("%event%", eventName));
                     } else {
