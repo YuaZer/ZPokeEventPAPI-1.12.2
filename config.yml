@@ -35,3 +35,5 @@ EventSet:
   Fish: "Fish"
   BeatTrainer: "BeatTrainer"
   BeatTrainer_我是训练师的名字呀: "BeatTrainer-我是训练师的名字呀"
+  LoseTrainer: "LoseTrainer"
+  LoseTrainer_训练师一号: "被训练师一号打败啦"

@@ -123,5 +123,19 @@ public class PokeEvents implements Listener {
             }
             return;
         }
+        if (event.getForgeEvent() instanceof LostToTrainerEvent){
+            LostToTrainerEvent e = (LostToTrainerEvent)event.getForgeEvent();
+            Player player = Bukkit.getPlayer(e.player.func_110124_au());
+            String trainer = e.trainer.getName("en_us");
+            if (!YamlUtils.getConfigMessage("EventSet.LoseTrainer").equalsIgnoreCase("") && Main.getEventMap().get(player.getName(), YamlUtils.getConfigMessage("EventSet.LoseTrainer")) != null) {
+                int before = Main.getEventMap().get(player.getName(), YamlUtils.getConfigMessage("EventSet.LoseTrainer"));
+                Main.getEventMap().put(player.getName(), YamlUtils.getConfigMessage("EventSet.LoseTrainer"), ++before);
+            }
+            if (!YamlUtils.getConfigMessage("EventSet.LoseTrainer_" + trainer).equalsIgnoreCase("") && Main.getEventMap().get(player.getName(), YamlUtils.getConfigMessage("EventSet.LoseTrainer_" + trainer)) != null) {
+                int before = Main.getEventMap().get(player.getName(), YamlUtils.getConfigMessage("EventSet.LoseTrainer_" + trainer));
+                Main.getEventMap().put(player.getName(), YamlUtils.getConfigMessage("EventSet.LoseTrainer_" + trainer), ++before);
+            }
+            return;
+        }
     }
 }
